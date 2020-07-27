@@ -33,7 +33,6 @@ client_secrets.json
 
 logs/
 !metadata.db
-config/
 !app.db
 !gdrive.db
 .DS_Store
