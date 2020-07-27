@@ -38,7 +38,7 @@ from babel import Locale as LC
 from babel.core import UnknownLocaleError
 from flask_babel import gettext as _
 
-from . import logger, ub, isoLanguages
+from . import logger, ub, isoLanguages, constants
 from .pagination import Pagination
 
 try:
@@ -372,11 +372,12 @@ class CalibreDB(threading.Thread):
         self.dispose()
         # global engine
 
-        if not config.config_calibre_dir:
-            config.invalidate()
-            return False
+        # if not config.config_calibre_dir:
+        #     config.invalidate()
+        #     return False
 
-        dbpath = os.path.join(config.config_calibre_dir, "metadata.db")
+        dbpath = os.path.join(constants.BASE_DIR, 'config','metadata.db')
+        # dbpath = os.path.join(config.config_calibre_dir,''metadata.db')
         if not os.path.exists(dbpath):
             config.invalidate()
             return False
