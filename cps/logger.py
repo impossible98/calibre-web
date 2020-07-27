@@ -1,21 +1,3 @@
-# -*- coding: utf-8 -*-
-
-#   This file is part of the Calibre-Web (https://github.com/janeczku/calibre-web)
-#     Copyright (C) 2019 pwr
-#
-#   This program is free software: you can redistribute it and/or modify
-#   it under the terms of the GNU General Public License as published by
-#   the Free Software Foundation, either version 3 of the License, or
-#   (at your option) any later version.
-#
-#   This program is distributed in the hope that it will be useful,
-#   but WITHOUT ANY WARRANTY; without even the implied warranty of
-#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#   GNU General Public License for more details.
-#
-#   You should have received a copy of the GNU General Public License
-#   along with this program. If not, see <http://www.gnu.org/licenses/>.
-
 from __future__ import division, print_function, unicode_literals
 import os
 import sys
@@ -27,13 +9,15 @@ from logging.handlers import RotatingFileHandler
 from .constants import CONFIG_DIR as _CONFIG_DIR
 
 
-ACCESS_FORMATTER_GEVENT  = Formatter("%(message)s")
-ACCESS_FORMATTER_TORNADO = Formatter("[%(asctime)s] %(message)s")
+ACCESS_FORMATTER_GEVENT  = Formatter('%(message)s22')
+ACCESS_FORMATTER_TORNADO = Formatter('[%(asctime)s] 111%(message)s')
 
-FORMATTER           = Formatter("[%(asctime)s] %(levelname)5s {%(name)s:%(lineno)d} %(message)s")
-DEFAULT_LOG_LEVEL   = logging.INFO
-DEFAULT_LOG_FILE    = os.path.join(_CONFIG_DIR, "calibre-web.log")
-DEFAULT_ACCESS_LOG  = os.path.join(_CONFIG_DIR, "access.log")
+FORMATTER = Formatter('%(asctime)s [%(levelname)s] (%(name)s): %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
+DEFAULT_LOG_LEVEL   = logging.DEBUG
+DEFAULT_LOG_FILE    = os.path.join(_CONFIG_DIR, 'logs',"calibre-web.log")
+    # if not os.path.exists(DEFAULT_LOG_FILE):
+        # pass
+DEFAULT_ACCESS_LOG  = os.path.join(_CONFIG_DIR, 'logs',"access.log")
 LOG_TO_STDERR       = '/dev/stderr'
 LOG_TO_STDOUT       = '/dev/stdout'
 

@@ -49,6 +49,7 @@ def main():
         app.register_blueprint(kobo_auth)
     if oauth_available:
         app.register_blueprint(oauth)
+    print('Running on http://127.0.0.1:8083 (Press CTRL+C to quit)')
     success = web_server.start()
     sys.exit(0 if success else 1)
 
