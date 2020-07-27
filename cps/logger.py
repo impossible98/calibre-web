@@ -9,17 +9,18 @@ from logging.handlers import RotatingFileHandler
 from .constants import CONFIG_DIR as _CONFIG_DIR
 
 
-ACCESS_FORMATTER_GEVENT  = Formatter('%(message)s22')
+ACCESS_FORMATTER_GEVENT = Formatter('%(message)s22')
 ACCESS_FORMATTER_TORNADO = Formatter('[%(asctime)s] 111%(message)s')
 
-FORMATTER = Formatter('%(asctime)s [%(levelname)s] (%(name)s): %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
-DEFAULT_LOG_LEVEL   = logging.DEBUG
-DEFAULT_LOG_FILE    = os.path.join(_CONFIG_DIR, 'logs',"calibre-web.log")
-    # if not os.path.exists(DEFAULT_LOG_FILE):
-        # pass
-DEFAULT_ACCESS_LOG  = os.path.join(_CONFIG_DIR, 'logs',"access.log")
-LOG_TO_STDERR       = '/dev/stderr'
-LOG_TO_STDOUT       = '/dev/stdout'
+FORMATTER = Formatter(
+    '%(asctime)s [%(levelname)s] (%(name)s): %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
+DEFAULT_LOG_LEVEL = logging.DEBUG
+DEFAULT_LOG_FILE = os.path.join(_CONFIG_DIR, 'logs', "calibre-web.log")
+if not os.path.exists(DEFAULT_LOG_FILE):
+    pass
+DEFAULT_ACCESS_LOG = os.path.join(_CONFIG_DIR, 'logs', "access.log")
+LOG_TO_STDERR = '/dev/stderr'
+LOG_TO_STDOUT = '/dev/stdout'
 
 logging.addLevelName(logging.WARNING, "WARN")
 logging.addLevelName(logging.CRITICAL, "CRIT")
@@ -41,6 +42,7 @@ def create():
 
 def is_debug_enabled():
     return logging.root.level <= logging.DEBUG
+
 
 def is_info_enabled(logger):
     return logging.getLogger(logger).level <= logging.INFO
@@ -110,11 +112,13 @@ def setup(log_file, log_level=None):
             file_handler.baseFilename = log_file
     else:
         try:
-            file_handler = RotatingFileHandler(log_file, maxBytes=50000, backupCount=2)
+            file_handler = RotatingFileHandler(
+                log_file, maxBytes=50000, backupCount=2)
         except IOError:
             if log_file == DEFAULT_LOG_FILE:
                 raise
-            file_handler = RotatingFileHandler(DEFAULT_LOG_FILE, maxBytes=50000, backupCount=2)
+            file_handler = RotatingFileHandler(
+                DEFAULT_LOG_FILE, maxBytes=50000, backupCount=2)
             log_file = ""
     file_handler.setFormatter(FORMATTER)
 
@@ -136,17 +140,20 @@ def create_access_log(log_file, log_name, formatter):
     access_log.propagate = False
     access_log.setLevel(logging.INFO)
     try:
-        file_handler = RotatingFileHandler(log_file, maxBytes=50000, backupCount=2)
+        file_handler = RotatingFileHandler(
+            log_file, maxBytes=50000, backupCount=2)
     except IOError:
         if log_file == DEFAULT_ACCESS_LOG:
             raise
-        file_handler = RotatingFileHandler(DEFAULT_ACCESS_LOG, maxBytes=50000, backupCount=2)
+        file_handler = RotatingFileHandler(
+            DEFAULT_ACCESS_LOG, maxBytes=50000, backupCount=2)
         log_file = ""
 
     file_handler.setFormatter(formatter)
     access_log.addHandler(file_handler)
     return access_log, \
-           "" if _absolute_log_file(log_file, DEFAULT_ACCESS_LOG) == DEFAULT_ACCESS_LOG else log_file
+        "" if _absolute_log_file(
+            log_file, DEFAULT_ACCESS_LOG) == DEFAULT_ACCESS_LOG else log_file
 
 
 # Enable logging of smtp lib debug output
@@ -167,4 +174,5 @@ class StderrLogger(object):
 
 
 # default configuration, before application settings are applied
-setup(LOG_TO_STDERR, logging.DEBUG if os.environ.get('FLASK_DEBUG') else DEFAULT_LOG_LEVEL)
+setup(LOG_TO_STDERR, logging.DEBUG if os.environ.get(
+    'FLASK_DEBUG') else DEFAULT_LOG_LEVEL)

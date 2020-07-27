@@ -1,33 +1,18 @@
-# -*- coding: utf-8 -*-
-
-#  This file is part of the Calibre-Web (https://github.com/janeczku/calibre-web)
-#    Copyright (C) 2018-2019 OzzieIsaacs, cervinko, jkrehm, bodybybuddha, ok11,
-#                            andy29485, idalin, Kyosfonica, wuqi, Kennyl, lemmsh,
-#                            falgh1, grunjol, csitko, ytils, xybydy, trasba, vrabe,
-#                            ruben-herold, marblepebble, JackED42, SiphonSquirrel,
-#                            apetresc, nanu-c, mutschler
-#
-#  This program is free software: you can redistribute it and/or modify
-#  it under the terms of the GNU General Public License as published by
-#  the Free Software Foundation, either version 3 of the License, or
-#  (at your option) any later version.
-#
-#  This program is distributed in the hope that it will be useful,
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#  GNU General Public License for more details.
-#
-#  You should have received a copy of the GNU General Public License
-#  along with this program. If not, see <http://www.gnu.org/licenses/>.
-
-from __future__ import division, print_function, unicode_literals
-import sys
+from __future__ import division, unicode_literals
 import platform
 import sqlite3
+import sys
 from collections import OrderedDict
 
-import babel, pytz, requests, sqlalchemy
-import werkzeug, flask, flask_login, flask_principal, jinja2
+import babel
+import pytz
+import requests
+import sqlalchemy
+import werkzeug
+import flask
+import flask_login
+import flask_principal
+import jinja2
 from flask_babel import gettext as _
 
 from . import db, calibre_db, converter, uploader, server, isoLanguages, constants
@@ -54,11 +39,11 @@ about = flask.Blueprint('about', __name__)
 
 
 _VERSIONS = OrderedDict(
-    Platform = '{0[0]} {0[2]} {0[3]} {0[4]} {0[5]}'.format(platform.uname()),
+    Platform='{0[0]} {0[2]} {0[3]} {0[4]} {0[5]}'.format(platform.uname()),
     Python=sys.version,
     Calibre_Web=constants.STABLE_VERSION['version'] + ' - '
-                + constants.NIGHTLY_VERSION[0].replace('%','%%') + ' - '
-                + constants.NIGHTLY_VERSION[1].replace('%','%%'),
+    + constants.NIGHTLY_VERSION[0].replace('%', '%%') + ' - '
+    + constants.NIGHTLY_VERSION[1].replace('%', '%%'),
     WebServer=server.VERSION,
     Flask=flask.__version__,
     Flask_Login=flask_loginVersion,
@@ -72,12 +57,13 @@ _VERSIONS = OrderedDict(
     SQLite=sqlite3.sqlite_version,
     iso639=isoLanguages.__version__,
     pytz=pytz.__version__,
-    Unidecode = unidecode_version,
-    Flask_SimpleLDAP =  u'installed' if bool(services.ldap) else None,
-    python_LDAP = services.ldapVersion if bool(services.ldapVersion) else None,
-    Goodreads = u'installed' if bool(services.goodreads_support) else None,
-    jsonschema = services.SyncToken.__version__  if bool(services.SyncToken) else None,
-    flask_dance = flask_danceVersion
+    Unidecode=unidecode_version,
+    Flask_SimpleLDAP=u'installed' if bool(services.ldap) else None,
+    python_LDAP=services.ldapVersion if bool(services.ldapVersion) else None,
+    Goodreads=u'installed' if bool(services.goodreads_support) else None,
+    jsonschema=services.SyncToken.__version__ if bool(
+        services.SyncToken) else None,
+    flask_dance=flask_danceVersion
 )
 _VERSIONS.update(uploader.get_versions())
 

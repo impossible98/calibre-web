@@ -9,6 +9,7 @@ else:
     sys.path.append(os.path.dirname(os.path.abspath(__file__)))
     sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'vendor'))
 
+from cps import constants
 from cps import create_app
 from cps import web_server
 from cps.opds import opds
@@ -49,7 +50,7 @@ def main():
         app.register_blueprint(kobo_auth)
     if oauth_available:
         app.register_blueprint(oauth)
-    print('Running on http://127.0.0.1:8083 (Press CTRL+C to quit)')
+    print('Running on http://127.0.0.1:{} (Press CTRL+C to quit)'.format(constants.DEFAULT_PORT))
     success = web_server.start()
     sys.exit(0 if success else 1)
 
