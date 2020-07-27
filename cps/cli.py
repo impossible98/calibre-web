@@ -42,8 +42,8 @@ if sys.version_info < (3, 0):
         args.s = args.s.decode('utf-8')
 
 
-settingspath = args.p or os.path.join(_CONFIG_DIR, "app.db")
-gdpath       = args.g or os.path.join(_CONFIG_DIR, "gdrive.db")
+settingspath = args.p or os.path.join(_CONFIG_DIR,'config', 'app.db')
+gdpath = args.g or os.path.join(_CONFIG_DIR, 'config','gdrive.db')
 
 # handle and check parameter for ssl encryption
 certfilepath = None
