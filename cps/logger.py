@@ -15,9 +15,10 @@ ACCESS_FORMATTER_TORNADO = Formatter('[%(asctime)s] 111%(message)s')
 FORMATTER = Formatter(
     '%(asctime)s [%(levelname)s] (%(name)s): %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
 DEFAULT_LOG_LEVEL = logging.DEBUG
+DEFAULT_LOG_PATH = os.path.join(_CONFIG_DIR, 'logs')
 DEFAULT_LOG_FILE = os.path.join(_CONFIG_DIR, 'logs', "calibre-web.log")
 if not os.path.exists(DEFAULT_LOG_FILE):
-    pass
+    os.mkdir(DEFAULT_LOG_PATH)
 DEFAULT_ACCESS_LOG = os.path.join(_CONFIG_DIR, 'logs', "access.log")
 LOG_TO_STDERR = '/dev/stderr'
 LOG_TO_STDOUT = '/dev/stdout'

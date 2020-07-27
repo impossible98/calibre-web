@@ -41,9 +41,10 @@ about = flask.Blueprint('about', __name__)
 _VERSIONS = OrderedDict(
     Platform='{0[0]} {0[2]} {0[3]} {0[4]} {0[5]}'.format(platform.uname()),
     Python=sys.version,
-    Calibre_Web=constants.STABLE_VERSION['version'] + ' - '
-    + constants.NIGHTLY_VERSION[0].replace('%', '%%') + ' - '
-    + constants.NIGHTLY_VERSION[1].replace('%', '%%'),
+    # Calibre_Web=constants.STABLE_VERSION['version'] + ' - '
+    # + constants.NIGHTLY_VERSION[0].replace('%', '%%') + ' - '
+    # + constants.NIGHTLY_VERSION[1].replace('%', '%%'),
+    Calibre_Web=constants.STABLE_VERSION['version'],
     WebServer=server.VERSION,
     Flask=flask.__version__,
     Flask_Login=flask_loginVersion,

@@ -7,7 +7,8 @@ if sys.version_info < (3, 0):
     sys.exit(0)
 else:
     sys.path.append(os.path.dirname(os.path.abspath(__file__)))
-    sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'vendor'))
+    sys.path.append(os.path.join(os.path.dirname(
+        os.path.abspath(__file__)), 'vendor'))
 
 from cps import constants
 from cps import create_app
@@ -50,6 +51,7 @@ def main():
         app.register_blueprint(kobo_auth)
     if oauth_available:
         app.register_blueprint(oauth)
+    print('Calibre-web Version: {}'.format(constants.VERSION))
     print('Running on http://127.0.0.1:{} (Press CTRL+C to quit)'.format(constants.DEFAULT_PORT))
     success = web_server.start()
     sys.exit(0 if success else 1)

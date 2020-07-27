@@ -106,8 +106,13 @@ def selected_roles(dictionary):
 # :rtype: BookMeta
 BookMeta = namedtuple('BookMeta', 'file_path, extension, title, author, cover, description, tags, series, '
                                   'series_id, languages')
-
-STABLE_VERSION = {'version': '0.6.8'}
+try:
+    VERSION_FILE_PATH = os.path.join(BASE_DIR, 'VERSION')
+    with open(VERSION_FILE_PATH) as f:
+        VERSION = f.read()
+except os.error as e:
+    print(e)
+STABLE_VERSION = {'version': '{}'.format(VERSION)}
 
 NIGHTLY_VERSION = {}
 NIGHTLY_VERSION[0] = '$Format:%H$'
