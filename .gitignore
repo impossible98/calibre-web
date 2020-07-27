@@ -1,0 +1,39 @@
+### Python ###
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+.Python
+env/
+venv/
+eggs/
+dist/
+build/
+vendor/
+.eggs/
+*.egg-info/
+.installed.cfg
+*.egg
+.pylint.d
+
+# calibre-web
+*.db
+*.log
+
+.idea/
+*.bak
+*.log.*
+
+settings.yaml
+gdrive_credentials
+client_secrets.json
+
+
+logs/
+!metadata.db
+config/
+!app.db
+!gdrive.db
+.DS_Store
